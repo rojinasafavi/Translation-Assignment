@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-gray-950 text-gray-100">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocalize - Live Video Translator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body class="min-h-screen bg-gradient-to-b from-gray-950 to-gray-900">
+
+    <div class="container mx-auto max-w-5xl px-4 py-8 flex flex-col min-h-screen">
+        <header class="text-center mb-10">
+            <div class="max-w-5xl mx-auto flex justify-between">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-900 flex items-center justify-center text-white text-2xl shadow-lg">
+                        <svg class="mic-icon w-6 h-6 text-white" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 2C10.3431 2 9 3.34315 9 5V11C9 12.6569 10.3431 14 12 14C13.6569 14 15 12.6569 15 11V5C15 3.34315 13.6569 2 12 2Z"
+                                fill="currentColor" />
+                            <path d="M19 10V11C19 14.866 15.866 18 12 18C8.13401 18 5 14.866 5 11V10"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            <path d="M12 18V22M8 22H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1
+                            class="text-left text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-indigo-500 to-indigo-900 bg-clip-text text-transparent">
+                            Vocalize
+                        </h1>
+                        <p class="text-slate-600 text-sm md:text-base -mt-1">Live Video Translator</p>
+                    </div>
+                </div>
+        </header>
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-6 mb-5">
+            <div>
+                <div
+                    class="flex items-center gap-4 bg-gray-800/60 px-6 py-3 rounded-full border border-gray-700/60 backdrop-blur-sm">
+                    <span id="lang-left" class="lang-label text-lg font-medium text-blue-300 min-w-[90px] text-right">
+                        EN (English)
+                    </span>
+
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="lang-toggle" class="sr-only peer">
+                        <div
+                            class="w-14 h-7 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-blue-600 peer-checked:to-indigo-600">
+                        </div>
+                    </label>
+
+                    <span id="lang-right" class="lang-label text-lg font-medium text-indigo-300 min-w-[90px]">
+                        FI (Finnish)
+                    </span>
+                </div>
+            </div>
+            <button id="mic-btn"
+                class="mic-button group relative p-5 bg-gradient-to-br from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 active:scale-95 transition-all duration-200 rounded-full shadow-xl shadow-red-900/40 focus:outline-none focus:ring-4 focus:ring-red-700/50">
+                <svg class="mic-icon w-8 h-8 text-white" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 2C10.3431 2 9 3.34315 9 5V11C9 12.6569 10.3431 14 12 14C13.6569 14 15 12.6569 15 11V5C15 3.34315 13.6569 2 12 2Z"
+                        fill="currentColor" />
+                    <path d="M19 10V11C19 14.866 15.866 18 12 18C8.13401 18 5 14.866 5 11V10" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" />
+                    <path d="M12 18V22M8 22H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <div id="status-text" class="text-gray-300 text-sm sm:text-base text-right max-w-m pb-5 ">
+            Click the mic to start listening and view camera
+        </div>
+        <div
+            class="relative flex-1 bg-black rounded-2xl overflow-hidden shadow-2xl shadow-black/70 border border-gray-800 max-h-[60vh] md:max-h-[70vh]">
+            <video id="user-video" autoplay playsinline muted class="w-full h-full object-cover"></video>
+            <div id="emotion-badge"
+                class="emotion-badge hidden absolute top-4 left-4 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-gray-700/50 flex items-center gap-2 text-sm font-medium shadow-lg">
+                <span id="emotion-icon" class="text-xl">😐</span>
+                <span id="emotion-text">Neutral</span>
+            </div>
+            <div id="subtitles-display"
+                class="subtitles-overlay absolute bottom-8 left-0 right-0 px-6 py-4 text-center pointer-events-none">
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api/dist/face-api.min.js"></script>
+        <script src="app.js"></script>
+</body>
+
+</html>
